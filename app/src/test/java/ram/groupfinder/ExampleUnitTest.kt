@@ -1,4 +1,4 @@
-package RAM.groupfinder
+package ram.groupfinder
 
 import org.junit.Test
 

@@ -1,4 +1,4 @@
-package RAM.groupfinder.ui.theme
+package ram.groupfinder.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle

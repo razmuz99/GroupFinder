@@ -1,4 +1,4 @@
-package RAM.groupfinder.ui.theme
+package ram.groupfinder.ui.theme
 
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Shapes

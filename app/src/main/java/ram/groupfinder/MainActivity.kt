@@ -1,4 +1,4 @@
-package RAM.groupfinder
+package ram.groupfinder
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
@@ -10,7 +10,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import RAM.groupfinder.ui.theme.GroupFinderTheme
+import ram.groupfinder.ui.theme.GroupFinderTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
