@@ -5,37 +5,41 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.graphics.Color
 
 private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
+    primary = Green30,
+    onPrimary = Green90,
+    secondary = DarkGreen80,
+    onSecondary = DarkGreen20,
+    error = Red80,
+    onError = Red20,
+    background = Grey20,
+    onBackground = Grey90,
+    surface = GreenGrey30,
+    onSurface = GreenGrey80,
 )
 
 private val LightColorPalette = lightColors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
-
-    /* Other default colors to override
-    background = Color.White,
-    surface = Color.White,
+    primary = Green40,
     onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
+    secondary = DarkGreen40,
+    onSecondary = Color.White,
+    error = Red40,
+    onError = Color.White,
+    background = Grey99,
+    onBackground = Grey10,
+    surface = GreenGrey90,
+    onSurface = GreenGrey30,
 )
 
 @Composable
 fun GroupFinderTheme(
-    darkTheme: Boolean = isSystemInDarkTheme(),
     content: @Composable () -> Unit
 ) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
+    val colors = when {
+        isSystemInDarkTheme() -> DarkColorPalette
+        else -> LightColorPalette
     }
 
     MaterialTheme(
