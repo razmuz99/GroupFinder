@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Home
+import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Alignment.Companion.CenterHorizontally
@@ -36,44 +36,45 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-
 @Composable
 private fun MainScreen(/* onButtonClick: () -> Unit */) {
-    TopAppBar(Modifier.fillMaxWidth()) {
-        Box() {
-            Text(
-                text = "Top bar",
-                fontSize = 20.sp
-            )
-            IconButton(onClick = { /*TODO*/ }) {
-               // Icon(addPathNodes(res/drawable/Beta_logo.png))
-
-            }
-        }
-    }
     val navController = rememberNavController()
-    Scaffold (
+    Scaffold(
+        topBar = {
+            TopAppBar(Modifier.fillMaxWidth(), backgroundColor = Color.DarkGray) {
+                Box() {
+                    Text(
+                        text = "Top bar",
+                        fontSize = 20.sp
+                    )
+                    IconButton(onClick = { /*TODO*/ }) {
+                        // Icon(addPathNodes(res/drawable/Beta_logo.png))
+
+                    }
+                }
+            }
+        },
         bottomBar = {
             BottomNavigationBar(items = listOf(
                 BottomNavItem(
                     name = "Search Group",
                     route = "searchGroup",
-                    icon = Icons.Default.Home
+                    icon = Icons.Default.Groups
                 ),
                 BottomNavItem(
                     name = "Search Person",
                     route = "searchPerson",
-                    icon = Icons.Default.Home
+                    icon = Icons.Default.Person
                 ),
                 BottomNavItem(
                     name = "Create Post",
                     route = "createPost",
-                    icon = Icons.Default.Home
+                    icon = Icons.Default.Create
                 ),
                 BottomNavItem(
                     name = "Profile",
                     route = "profile",
-                    icon = Icons.Default.Home
+                    icon = Icons.Default.AccountCircle
                 )
 
             ),
@@ -86,7 +87,6 @@ private fun MainScreen(/* onButtonClick: () -> Unit */) {
     ) {
         Navigation(navController = navController)
     }
-
 }
 
 @Preview(showBackground = true)
