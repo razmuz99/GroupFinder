@@ -1,4 +1,4 @@
-package ram.groupfinder.pages
+package ram.groupfinder.ui.pages.profile
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -10,12 +10,12 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun CreatePost(){
+fun Profile(){
     Box(
         modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
     ){
         Text(
-            text = "Create Post Page",
+            text = "Profile Page",
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold
         )

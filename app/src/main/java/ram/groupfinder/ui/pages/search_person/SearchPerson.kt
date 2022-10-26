@@ -1,4 +1,4 @@
-package ram.groupfinder.pages
+package ram.groupfinder.ui.pages.search_person
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
