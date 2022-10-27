@@ -11,6 +11,7 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.SystemUiController
@@ -47,13 +48,29 @@ private fun MainScreen() {
     Scaffold(
         topBar = {
             TopAppBar(Modifier.fillMaxWidth(), backgroundColor = MaterialTheme.colors.primary) {
-                Box {
-                    Text(
-                        text = "Group Finder",
-                        fontSize = 30.sp,
-                        fontWeight = FontWeight.Bold,
-                        color = MaterialTheme.colors.onPrimary
-                    )
+                Box(Modifier.fillMaxWidth()){
+
+                    Row(Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.SpaceBetween) {
+                        //Arrangement.SpaceBetween
+                        Box {
+                            Text(
+                                text = "Group Finder",
+                                fontSize = 30.sp,
+                                fontWeight = FontWeight.Bold,
+                                color = MaterialTheme.colors.onPrimary
+                            )
+                        }
+                        Arrangement.SpaceEvenly
+                        Box{
+                            Text(
+                                text = "user",
+                                fontSize = 30.sp,
+                                //fontWeight = FontWeight.Normal,
+                                color = MaterialTheme.colors.onPrimary
+                            )
+                        }
+
+                    }
                 }
             }
         },
@@ -92,4 +109,10 @@ private fun MainScreen() {
     }
 }
 
-
+@Preview(showBackground = true)
+@Composable
+fun DefaultPreview() {
+    GroupFinderTheme {
+        MainScreen()
+    }
+}
