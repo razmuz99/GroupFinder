@@ -1,5 +1,7 @@
 package ram.groupfinder.ui.pages.components
 
+import androidx.compose.material.Text
+import androidx.compose.material.TextField
 import androidx.compose.runtime.*
 import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.ui.tooling.preview.Preview
@@ -10,9 +12,26 @@ https://www.jetpackcompose.net/textfield-in-jetpack-compose
 */
 
 @Composable
-fun TextField () {
+fun TextField (
+    labelText: String?,
+    placeholderText: String?
+) {
     var text by remember { mutableStateOf(TextFieldValue("")) }
-    androidx.compose.material.TextField(value = text, onValueChange = {newText -> text = newText})
+
+    TextField(
+        value = text,
+        onValueChange = {newText -> text = newText},
+        label = {
+            if (labelText != null) {
+                Text(text = labelText)
+            }
+        },
+        placeholder = {
+            if (placeholderText != null) {
+                Text(text = placeholderText)
+            }
+        }
+    )
 
 
 }
@@ -21,6 +40,6 @@ fun TextField () {
 @Composable
 fun DefaultPreview() {
     GroupFinderTheme {
-        TextField()
+        //TextField(label = "PreviewLabel", placeholder = "PreviewPlaceholder")
     }
 }
