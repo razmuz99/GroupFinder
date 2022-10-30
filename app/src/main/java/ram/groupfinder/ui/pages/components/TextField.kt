@@ -1,6 +1,5 @@
 package ram.groupfinder.ui.pages.components
 
-import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
 import androidx.compose.material.Text
@@ -22,6 +21,7 @@ Labels and placeholders.
 
 /**
  * TextField is a reusable component with optional label and placeholder
+ * It is used in SearchBar.kt
  * */
 @Composable
 fun TextField (
@@ -48,9 +48,6 @@ fun TextField (
             keyboardType = KeyboardType.Text, // permits all types of text
             imeAction = ImeAction.Search // makes a search icon in lower right corner of keyboard
         ),
-        /*leadingIcon = { // or trailingIcon
-            Icon(imageVector = Icons.Default.Search, contentDescription = null)
-        }, TODO: make icon optional */
         /* KeyboardActions(
             onSearch = { TODO: Implement search }
         ) */
@@ -61,6 +58,6 @@ fun TextField (
 @Composable
 fun DefaultPreview() {
     GroupFinderTheme {
-        TextField(labelText = "PreviewLabel", placeholderText = "PreviewPlaceholder")
+        //TextField(labelText = "PreviewLabel", placeholderText = "PreviewPlaceholder")
     }
 }

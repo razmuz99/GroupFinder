@@ -1,10 +1,16 @@
 package ram.groupfinder.ui.pages.components
 
-import android.graphics.drawable.Icon
 import androidx.compose.foundation.layout.Row
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
-import ram.groupfinder.ui.pages.components.TextField
 
+/**
+ * Search bar is made of TextField() with a clickable IconButton with search function.
+ * It is used in SearchPage.kt
+ * */
 @Composable
 fun SearchBar (
     labelText: String?,
@@ -13,9 +19,12 @@ fun SearchBar (
     Row() {
         TextField(
             labelText = labelText,
-            placeholderText = placeholderText)
-
-        /* TODO: Possibly add iconButton with search ability */
-
+            placeholderText = placeholderText
+        )
+        IconButton(
+            onClick = { /*TODO: Make searchable*/ },
+        ) {
+            Icon(imageVector = Icons.Default.Search, contentDescription = null)
+        }
     }
 }
