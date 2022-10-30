@@ -1,12 +1,11 @@
 package ram.groupfinder.ui.pages.components
 
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardOptions
-import androidx.compose.material.Icon
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
@@ -26,12 +25,14 @@ Labels and placeholders.
 @Composable
 fun TextField (
     labelText: String?,
-    placeholderText: String?
+    placeholderText: String?,
+    textFieldSize: Float
 ) {
     var text by remember { mutableStateOf(TextFieldValue("")) }
     //val keyboardController = LocalSoftwareKeyboardController.current // experimental
 
     TextField(
+        modifier = Modifier.fillMaxWidth(textFieldSize),
         value = text,
         onValueChange = {newText -> text = newText},
         label = {
