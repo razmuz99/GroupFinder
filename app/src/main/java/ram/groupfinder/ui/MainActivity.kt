@@ -7,9 +7,11 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
@@ -43,7 +45,10 @@ class MainActivity : ComponentActivity() {
 @Composable
 private fun MainScreen() {
     val systemUiController: SystemUiController = rememberSystemUiController()
-    systemUiController.isStatusBarVisible = false
+    systemUiController.isStatusBarVisible = true
+    systemUiController.setStatusBarColor(MaterialTheme.colors.primary)
+    systemUiController.isNavigationBarVisible = true
+    systemUiController.setNavigationBarColor(Color.Black)
     val navController = rememberNavController()
     Scaffold(
         topBar = {
@@ -92,9 +97,9 @@ private fun MainScreen() {
                     icon = Icons.Default.Create
                 ),
                 BottomNavItem(
-                    name = "Profile",
-                    route = "profile",
-                    icon = Icons.Default.AccountCircle
+                    name = "My Posts",
+                    route = "myPosts",
+                    icon = Icons.Default.LibraryBooks
                 )
 
             ),
