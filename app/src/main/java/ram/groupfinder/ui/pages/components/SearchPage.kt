@@ -26,13 +26,7 @@ fun SearchPage (
         modifier = Modifier.padding(8.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        Text(
-            text = title,
-            fontSize = 30.sp,
-            fontWeight = FontWeight.Bold,
-            modifier = Modifier.padding(vertical = 20.dp)
-                .align(Alignment.CenterHorizontally)
-        )
+        PageTitle(title = title)
 
         Text(
             text = introduction,
