@@ -7,9 +7,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:816627006046:android:a167003ecf1e47a695d2cf",
+        "mobilesdk_app_id": "1:816627006046:android:7682def3423b493495d2cf",
         "android_client_info": {
-          "package_name": "RAM.groupfinder"
+          "package_name": "ram.groupfinder"
         }
       },
       "oauth_client": [
