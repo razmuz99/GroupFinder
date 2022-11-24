@@ -5,7 +5,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import ram.groupfinder.ui.pages.create_post.CreatePost
-import ram.groupfinder.ui.pages.profile.Profile
+import ram.groupfinder.ui.pages.my_posts.Profile
 import ram.groupfinder.ui.pages.search_group.SearchGroup
 import ram.groupfinder.ui.pages.search_person.SearchPerson
 
@@ -21,7 +21,7 @@ fun Navigation(navController: NavHostController){
         composable("createPost"){
             CreatePost()
         }
-        composable("profile"){
+        composable("myPosts"){
             Profile()
         }
     }
