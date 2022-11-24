@@ -31,25 +31,38 @@ fun CreatePost(){
             text = "Create a new post describing what type of group you have or are looking to create. Make a good description and use specific keywords to get the best results. Your next group adventure starts now!",
             modifier = Modifier.padding(vertical = 30.dp))
 
-        /* TODO: Checkboxes whether user is in a group or not */
         TextField(
             labelText = "Title",
             placeholderText = "E.g. Searching for band member",
             textFieldSize = 0.87f)
 
-        val checkedStateGroup = remember { mutableStateOf(false) }
-        val checkedStatePerson = remember { mutableStateOf(false) }
+        val isChecked = false
+        val checkedStateGroup = remember { mutableStateOf(isChecked) }
+        val checkedStatePerson = remember { mutableStateOf(isChecked) }
         Text(text = "Are you searching for a whole group or a single person?")
         Row {
-            Checkbox(checked = checkedStateGroup.value, onCheckedChange = {checkedStateGroup.value = it})
+            Checkbox(checked = checkedStateGroup.value,
+                onCheckedChange = {
+                    if (it) {
+                        checkedStateGroup.value = it
+                        checkedStatePerson.value = !it
+                    }
+                })
             Text(text = "Group", modifier = Modifier.padding(12.dp))
-            Checkbox(checked = checkedStatePerson.value, onCheckedChange = {checkedStatePerson.value = it})
+            Checkbox(checked = checkedStatePerson.value,
+                onCheckedChange = {
+                    if (it) {
+                        checkedStatePerson.value = it
+                        checkedStateGroup.value = !it
+                    }
+                })
             Text(text = "Person", modifier = Modifier.padding(12.dp))
         }
 
         SearchBar(
             labelText = "Keywords",
             placeholderText = "E.g. xylophone, evenings, mondays") /* TODO: Each keyword should be listed when chosen */
+
         SearchBar(
             labelText = "Location",
             placeholderText = "E.g. Birkum, Odense S, Fyn")
