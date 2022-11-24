@@ -1,6 +1,8 @@
 package ram.groupfinder.ui.pages.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.*
@@ -23,7 +25,9 @@ fun SearchPage (
     searchInterestPlaceholderText: String
 ) {
     Column (
-        modifier = Modifier.padding(8.dp),
+        modifier = Modifier
+            .verticalScroll(rememberScrollState())
+            .padding(8.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
         PageTitle(title = title)
