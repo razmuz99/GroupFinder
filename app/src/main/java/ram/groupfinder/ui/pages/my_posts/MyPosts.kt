@@ -13,7 +13,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
 @Composable
-fun Profile(){
+fun MyPosts(){
     Box(
         modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
     ){
