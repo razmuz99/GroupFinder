@@ -14,12 +14,12 @@ import com.google.firebase.auth.FirebaseAuth
 import ram.groupfinder.ui.database.deleteUser
 
 @Composable
-fun Profile(deleteAccount: () -> Unit, signOut: () -> Unit){
+fun MyPosts(deleteAccount: () -> Unit, signOut: () -> Unit){
     Box(
         modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
     ){
         Text(
-            text = "Profile Page",
+            text = "My Posts Page",
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold
         )
