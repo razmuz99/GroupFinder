@@ -16,6 +16,7 @@ import androidx.compose.runtime.rememberUpdatedState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
 import androidx.navigation.compose.rememberNavController
 import com.firebase.ui.auth.AuthUI
@@ -33,7 +34,6 @@ import ram.groupfinder.ui.models.BottomNavItem
 import ram.groupfinder.ui.theme.GroupFinderTheme
 import ram.groupfinder.ui.util.userFromFirebaseUser
 
-
 class MainActivity : ComponentActivity() {
 
     private val signInLauncher = registerForActivityResult(
@@ -43,7 +43,6 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
-        val response = result.idpResponse
         if (result.resultCode == RESULT_OK) {
             // Successfully signed in
             val user = FirebaseAuth.getInstance().currentUser
@@ -99,9 +98,7 @@ class MainActivity : ComponentActivity() {
                 ) {
                     MainScreen(createSignInIntent = ::createSignInIntent, signOut = ::signOut)
                 }
-
             }
-
         }
     }
 }
@@ -148,7 +145,6 @@ private fun MainScreen(createSignInIntent: () -> Unit, signOut: () -> Unit) {
                                     }else{
                                         signOut()
                                     }
-
                                 }
                             ){
                                 Text(text = buttonText.value)
@@ -193,15 +189,15 @@ private fun MainScreen(createSignInIntent: () -> Unit, signOut: () -> Unit) {
     }
 }
 
-/*
+
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     GroupFinderTheme {
-        MainScreen(null)
+        MainScreen({ Unit }, { Unit })
     }
 }
-*/
+
 
 
 
