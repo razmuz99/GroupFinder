@@ -1,4 +1,4 @@
-package ram.groupfinder.ui.pages.components
+package ram.groupfinder.ui.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.layout.padding

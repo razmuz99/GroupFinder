@@ -14,6 +14,14 @@
       },
       "oauth_client": [
         {
+          "client_id": "816627006046-5bgh9ru1hh133e2r01ssg7tv450tulnq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ram.groupfinder",
+            "certificate_hash": "ebff2db1d7210f0986152cbaee8de4cc552d8360"
+          }
+        },
+        {
           "client_id": "816627006046-arqoi0gg3gooavr5m3krdnqtueda01uv.apps.googleusercontent.com",
           "client_type": 3
         }

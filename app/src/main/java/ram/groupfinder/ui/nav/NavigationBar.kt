@@ -1,4 +1,4 @@
-package ram.groupfinder.ui.components
+package ram.groupfinder.ui.nav
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.size
@@ -11,7 +11,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import ram.groupfinder.ui.nav.models.BottomNavItem
+import ram.groupfinder.ui.models.BottomNavItem
 
 @Composable
 fun BottomNavigationBar(

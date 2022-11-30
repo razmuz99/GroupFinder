@@ -1,4 +1,4 @@
-package ram.groupfinder.ui.nav.models
+package ram.groupfinder.ui.models
 
 import androidx.compose.ui.graphics.vector.ImageVector
 

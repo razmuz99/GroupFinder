@@ -12,9 +12,9 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ram.groupfinder.ui.pages.components.PageTitle
-import ram.groupfinder.ui.pages.components.SearchBar
-import ram.groupfinder.ui.pages.components.TextField
+import ram.groupfinder.ui.components.PageTitle
+import ram.groupfinder.ui.components.SearchBar
+import ram.groupfinder.ui.components.TextField
 
 @Composable
 fun CreatePost(){

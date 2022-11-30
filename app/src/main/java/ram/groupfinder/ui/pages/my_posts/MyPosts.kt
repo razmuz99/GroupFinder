@@ -9,6 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.google.api.Authentication
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 
@@ -25,7 +26,7 @@ fun Profile(){
         Button(
 
             onClick = {
-                val db = Firebase.firestore
+                /* val db = Firebase.firestore
                 val user = hashMapOf(
                     "first" to "Ada",
                     "last" to "Lovelace",
@@ -34,7 +35,7 @@ fun Profile(){
 
                 db.collection("users")
                     .add(user)
-
+                    */
             }
         ){
             Text(text = "Test")

@@ -1,4 +1,4 @@
-package ram.groupfinder.ui.components.navigation
+package ram.groupfinder.ui.nav
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController

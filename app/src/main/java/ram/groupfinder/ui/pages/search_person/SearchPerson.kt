@@ -1,7 +1,7 @@
 package ram.groupfinder.ui.pages.search_person
 
 import androidx.compose.runtime.Composable
-import ram.groupfinder.ui.pages.components.SearchPage
+import ram.groupfinder.ui.components.SearchPage
 
 @Composable
 fun SearchPerson(

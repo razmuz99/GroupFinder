@@ -1,4 +1,4 @@
-package ram.groupfinder.ui.pages.components
+package ram.groupfinder.ui.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -9,7 +9,7 @@ import androidx.compose.ui.*
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import ram.groupfinder.ui.pages.components.SearchBar
+import ram.groupfinder.ui.components.SearchBar
 
 /**
  * SearchPage uses the reusable SearchBar(),
