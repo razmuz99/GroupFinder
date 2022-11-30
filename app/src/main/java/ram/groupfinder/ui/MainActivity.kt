@@ -26,7 +26,7 @@ import com.google.firebase.auth.FirebaseAuth
 import ram.groupfinder.ui.database.*
 import ram.groupfinder.ui.nav.BottomNavigationBar
 import ram.groupfinder.ui.nav.Navigation
-import ram.groupfinder.ui.models.BottomNavItem
+import ram.groupfinder.ui.components.models.BottomNavItem
 import ram.groupfinder.ui.theme.GroupFinderTheme
 import ram.groupfinder.ui.util.userFromFirebaseUser
 
@@ -180,8 +180,8 @@ private fun MainScreen(createSignInIntent: () -> Unit, signOut: () -> Unit, view
                     icon = Icons.Default.Create
                 ),
                 BottomNavItem(
-                    name = "My Posts",
-                    route = "myPosts",
+                    name = "Profile",
+                    route = "profile",
                     icon = Icons.Default.LibraryBooks
                 )
 

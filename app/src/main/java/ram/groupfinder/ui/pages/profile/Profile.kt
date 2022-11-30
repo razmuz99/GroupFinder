@@ -8,6 +8,7 @@ import androidx.compose.material.Button
 import androidx.compose.material.Card
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.RememberObserver
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,11 +18,13 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.core.graphics.convertTo
+import androidx.navigation.NavController
+import androidx.navigation.compose.rememberNavController
 import org.intellij.lang.annotations.JdkConstants.HorizontalAlignment
 import ram.groupfinder.R
 
 @Composable
-fun Profile(){
+fun Profile(navController : NavController){
     Box(
         modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter
     ){
@@ -39,7 +42,7 @@ fun Profile(){
                 )
             }
             ProfileImage()
-            Options()
+            Options(navController)
         }
     }
 }
@@ -83,14 +86,16 @@ fun ProfileImage(){
 }
 
 @Composable
-fun Options(){
-    Column(modifier = Modifier.fillMaxWidth()
+fun Options(navController : NavController){
+
+    Column(modifier = Modifier
+        .fillMaxWidth()
         .padding(8.dp) ,
         horizontalAlignment = Alignment.CenterHorizontally) {
         Button(onClick = { /*TODO*/ },) {
             Text(text = "Log out")
         }
-        Button(onClick = { /*TODO*/ }) {
+        Button(onClick = { navController.navigate("myPosts") }) {
             Text(text = "View posts")
             //related to composeable("myposts"){ MyPosts()}
         }

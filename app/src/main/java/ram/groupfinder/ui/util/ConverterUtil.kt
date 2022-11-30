@@ -2,8 +2,8 @@ package ram.groupfinder.ui.util
 
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentSnapshot
-import ram.groupfinder.ui.models.Post
-import ram.groupfinder.ui.models.User
+import ram.groupfinder.ui.components.models.Post
+import ram.groupfinder.ui.components.models.User
 import java.util.Date
 
 data class FBUser(
@@ -27,7 +27,7 @@ fun userFromFirebaseUser(firebaseUser: FirebaseUser): User {
     )
 }
 
-fun userFromDocument(document: DocumentSnapshot): User{
+fun userFromDocument(document: DocumentSnapshot): User {
     val data = document.data
     return if (data != null) {
         User(

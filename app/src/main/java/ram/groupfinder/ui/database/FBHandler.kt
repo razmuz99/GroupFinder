@@ -3,8 +3,8 @@ package ram.groupfinder.ui.database
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
-import ram.groupfinder.ui.models.Post
-import ram.groupfinder.ui.models.User
+import ram.groupfinder.ui.components.models.Post
+import ram.groupfinder.ui.components.models.User
 import ram.groupfinder.ui.util.postFromDocument
 import ram.groupfinder.ui.util.postsFromDocuments
 import ram.groupfinder.ui.util.userFromDocument
@@ -27,7 +27,7 @@ fun userExists(userId : String): Boolean{
     return returnValue
 }
 
-fun getUser(userId : String): User{
+fun getUser(userId : String): User {
     var user = User(userId, null, null, null, null, null)
     Firebase.firestore.collection("users").document(userId).get().addOnCompleteListener {  task ->
         if (task.isSuccessful) {
@@ -80,7 +80,7 @@ fun postExists(postId: String): Boolean{
     return returnValue
 }
 
-fun getPost(postId: String): Post{
+fun getPost(postId: String): Post {
     var post = Post(null, null, null, null, null, null, null, null, null)
     Firebase.firestore.collection("posts").document(postId).get().addOnCompleteListener {  task ->
         if (task.isSuccessful) {

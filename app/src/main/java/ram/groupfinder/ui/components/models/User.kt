@@ -1,4 +1,4 @@
-package ram.groupfinder.ui.models
+package ram.groupfinder.ui.components.models
 
 data class User (
     val userId: String,
