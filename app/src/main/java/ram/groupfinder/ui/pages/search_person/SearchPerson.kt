@@ -4,9 +4,7 @@ import androidx.compose.runtime.Composable
 import ram.groupfinder.ui.components.SearchPage
 
 @Composable
-fun SearchPerson(
-
-){
+fun SearchPerson(){
     SearchPage(
         title = "Search Person Page",
         introduction = "Welcome to the person search page.\n" +

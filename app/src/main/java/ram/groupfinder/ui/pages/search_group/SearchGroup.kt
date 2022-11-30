@@ -4,9 +4,7 @@ import androidx.compose.runtime.Composable
 import ram.groupfinder.ui.components.SearchPage
 
 @Composable
-fun SearchGroup(
-
-){
+fun SearchGroup(){
     SearchPage(
         title = "Search Group Page",
         introduction = "Welcome to the group search page.\n" +

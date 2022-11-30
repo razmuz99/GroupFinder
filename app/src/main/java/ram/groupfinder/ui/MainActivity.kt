@@ -5,13 +5,12 @@ import android.os.Bundle
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -24,9 +23,7 @@ import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.accompanist.systemuicontroller.SystemUiController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.google.firebase.auth.FirebaseAuth
-import ram.groupfinder.ui.database.createUser
-import ram.groupfinder.ui.database.isAuthorised
-import ram.groupfinder.ui.database.userExists
+import ram.groupfinder.ui.database.*
 import ram.groupfinder.ui.nav.BottomNavigationBar
 import ram.groupfinder.ui.nav.Navigation
 import ram.groupfinder.ui.models.BottomNavItem
@@ -34,6 +31,7 @@ import ram.groupfinder.ui.theme.GroupFinderTheme
 import ram.groupfinder.ui.util.userFromFirebaseUser
 
 class MainActivity : ComponentActivity() {
+    private val viewModel: MainViewModel by viewModels()
 
     private val signInLauncher = registerForActivityResult(
         FirebaseAuthUIActivityResultContract()
@@ -42,18 +40,36 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
+        var signedIn: Boolean
         if (result.resultCode == RESULT_OK) {
             // Successfully signed in
             val user = FirebaseAuth.getInstance().currentUser
             if (user != null) {
                 if(userExists(user.uid)) {
-                    Toast.makeText(this, "Sign in successful", Toast.LENGTH_LONG).show()
+                    signedIn = true
                 }else{
-                    createUser(userFromFirebaseUser(user))
+                    try{
+                        createUser(userFromFirebaseUser(user))
+                        signedIn = true
+                    }
+                    catch (e: Exception){
+                        signedIn = false
+                        signOut()
+                    }
                 }
+            }else{
+                signedIn = false
+                signOut()
             }
         } else {
             //Failed sign in
+            signedIn = false
+        }
+        if(signedIn){
+            viewModel.onTextChange("Log out")
+            Toast.makeText(this, "Sign in successful", Toast.LENGTH_LONG).show()
+        }else{
+            viewModel.onTextChange("Log in")
             Toast.makeText(this, "Sign in failed", Toast.LENGTH_LONG).show()
         }
     }
@@ -75,6 +91,8 @@ class MainActivity : ComponentActivity() {
         AuthUI.getInstance()
             .signOut(this)
             .addOnCompleteListener {
+                viewModel.onTextChange("Log in")
+                Toast.makeText(this, "You are signed out", Toast.LENGTH_LONG).show()
             }
     }
 
@@ -82,7 +100,8 @@ class MainActivity : ComponentActivity() {
         AuthUI.getInstance()
             .delete(this)
             .addOnCompleteListener {
-                // ...
+                viewModel.onTextChange("Log in")
+                Toast.makeText(this, "GroupFinder account deleted", Toast.LENGTH_LONG).show()
             }
     }
 
@@ -95,17 +114,16 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MainScreen(createSignInIntent = ::createSignInIntent, signOut = ::signOut)
+                    MainScreen(createSignInIntent = ::createSignInIntent, signOut = ::signOut, viewModel = viewModel, deleteAccount = ::delete)
                 }
             }
         }
     }
 }
 
-
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
-private fun MainScreen(createSignInIntent: () -> Unit, signOut: () -> Unit) {
+private fun MainScreen(createSignInIntent: () -> Unit, signOut: () -> Unit, viewModel: MainViewModel, deleteAccount: () -> Unit) {
     val systemUiController: SystemUiController = rememberSystemUiController()
     systemUiController.isStatusBarVisible = true
     systemUiController.setStatusBarColor(MaterialTheme.colors.primary)
@@ -117,15 +135,6 @@ private fun MainScreen(createSignInIntent: () -> Unit, signOut: () -> Unit) {
         topBar = {
             TopAppBar(Modifier.fillMaxWidth(), backgroundColor = MaterialTheme.colors.primary) {
                 Box(Modifier.fillMaxWidth()){
-
-                    val initText = if(FirebaseAuth.getInstance().currentUser == null){
-                        "Sign in"
-                    }else{
-                        "Sign out"
-                    }
-                    val buttonText = remember {
-                        mutableStateOf(initText)
-                    }
                     Row(Modifier.fillMaxWidth(),horizontalArrangement = Arrangement.SpaceBetween) {
                         Box {
                             Text(
@@ -146,7 +155,7 @@ private fun MainScreen(createSignInIntent: () -> Unit, signOut: () -> Unit) {
                                     }
                                 }
                             ){
-                                Text(text = buttonText.value)
+                                Text(text = viewModel.text.value)
                             }
                         }
                     }
@@ -184,16 +193,15 @@ private fun MainScreen(createSignInIntent: () -> Unit, signOut: () -> Unit) {
             )
         }
     ) {
-        Navigation(navController = navController)
+        Navigation(navController = navController, deleteAccount = deleteAccount, signOut = signOut)
     }
 }
-
 
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
     GroupFinderTheme {
-        MainScreen({ }, { })
+        MainScreen({ }, { }, MainViewModel(), {})
     }
 }
 

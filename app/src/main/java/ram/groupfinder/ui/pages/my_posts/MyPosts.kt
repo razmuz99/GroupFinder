@@ -7,14 +7,14 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.FirstBaseline
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
-import com.google.api.Authentication
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.auth.FirebaseAuth
+import ram.groupfinder.ui.database.deleteUser
 
 @Composable
-fun Profile(){
+fun Profile(deleteAccount: () -> Unit, signOut: () -> Unit){
     Box(
         modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
     ){
@@ -26,19 +26,12 @@ fun Profile(){
         Button(
 
             onClick = {
-                /* val db = Firebase.firestore
-                val user = hashMapOf(
-                    "first" to "Ada",
-                    "last" to "Lovelace",
-                    "born" to 1815
-                )
-
-                db.collection("users")
-                    .add(user)
-                    */
+                deleteAccount()
+                signOut()
+                FirebaseAuth.getInstance().currentUser?.let { deleteUser(it.uid) }
             }
         ){
-            Text(text = "Test")
+            Text(text = "Delete account")
         }
     }
 }

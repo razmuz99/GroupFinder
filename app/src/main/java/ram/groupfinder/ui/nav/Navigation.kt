@@ -10,7 +10,7 @@ import ram.groupfinder.ui.pages.search_group.SearchGroup
 import ram.groupfinder.ui.pages.search_person.SearchPerson
 
 @Composable
-fun Navigation(navController: NavHostController){
+fun Navigation(navController: NavHostController, deleteAccount: () -> Unit, signOut: () -> Unit){
     NavHost(navController = navController, startDestination = "searchGroup"){
         composable("searchGroup"){
             SearchGroup()
@@ -22,7 +22,7 @@ fun Navigation(navController: NavHostController){
             CreatePost()
         }
         composable("myPosts"){
-            Profile()
+            Profile(deleteAccount, signOut)
         }
     }
 }

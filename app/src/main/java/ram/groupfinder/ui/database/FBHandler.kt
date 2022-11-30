@@ -8,6 +8,7 @@ import ram.groupfinder.ui.models.User
 import ram.groupfinder.ui.util.postFromDocument
 import ram.groupfinder.ui.util.postsFromDocuments
 import ram.groupfinder.ui.util.userFromDocument
+import ram.groupfinder.ui.util.userToFBUser
 
 fun userExists(userId : String): Boolean{
     var returnValue = false
@@ -50,11 +51,16 @@ fun editUser(user: User){
 }
 
 fun createUser(user: User){
-    Firebase.firestore.collection("users").document(user.userId).set(user).addOnCompleteListener { task ->
+
+    Firebase.firestore.collection("users").document(user.userId).set(userToFBUser(user)).addOnCompleteListener { task ->
         if(!task.isSuccessful){
             throw Exception(task.exception)
         }
     }
+}
+
+fun deleteUser(userId: String){
+    Firebase.firestore.collection("users").document(userId).delete()
 }
 
 fun postExists(postId: String): Boolean{
@@ -118,6 +124,10 @@ fun editPost(post: Post){
         throw Exception("Missing postId")
     }
 
+}
+
+fun deletePost(postId: String){
+    Firebase.firestore.collection("posts").document(postId).delete()
 }
 
 fun isAuthorised(): Boolean{

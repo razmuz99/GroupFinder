@@ -6,6 +6,16 @@ import ram.groupfinder.ui.models.Post
 import ram.groupfinder.ui.models.User
 import java.util.Date
 
+data class FBUser(
+    val email: String?,
+    val firstName: String?,
+    val lastName: String?,
+    val phoneNumber: Number?,
+    val image: String?
+    )
+
+
+
 fun userFromFirebaseUser(firebaseUser: FirebaseUser): User {
     return User(
         firebaseUser.uid,
@@ -58,4 +68,8 @@ fun postsFromDocuments(documents: List<DocumentSnapshot>): ArrayList<Post> {
         posts.add(postFromDocument(document))
     }
     return posts
+}
+
+fun userToFBUser(user: User): FBUser{
+    return FBUser(user.email, user.firstName, user.lastName, user.phoneNumber, user.image)
 }
