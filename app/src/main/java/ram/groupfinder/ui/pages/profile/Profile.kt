@@ -45,6 +45,9 @@ fun Profile(){
 }
 @Composable
 fun ProfileImage(){
+  //  val private
+//    private imageview
+    //StoreReference storageReference
     //val imageUri = rememberSaveable { mutableStateOf("") }
     val painter = R.drawable.ic_user
     /*rememberPainter(
@@ -54,6 +57,8 @@ fun ProfileImage(){
         imageUri.value
 )
      */
+
+
     Column(modifier = Modifier
         .padding(8.dp)
         .fillMaxWidth(),
@@ -74,6 +79,7 @@ fun ProfileImage(){
         Text(text = "Profile picture missing")
 
     }
+
 }
 
 @Composable
@@ -101,9 +107,9 @@ Rediger informationer.
 Log ud.
 
 profil indhold:
-    - profil billede. (optional)
-    - navn.
-    - tlf nr.
+    private Imageview profil billede Fra URL givet google konto log in.
+    private string navn.
+    private string number.
     - mail.
 
 
