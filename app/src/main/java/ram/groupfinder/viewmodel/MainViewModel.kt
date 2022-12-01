@@ -6,10 +6,10 @@ import androidx.lifecycle.ViewModel
 import com.google.firebase.auth.FirebaseAuth
 
 class MainViewModel : ViewModel(){
-    private val _logInButtonText = mutableStateOf(if(FirebaseAuth.getInstance().currentUser == null){"Log in"}else{"Log out"} )
-    val logInButtonText: State<String> = _logInButtonText
+    private val _text = mutableStateOf(if(FirebaseAuth.getInstance().currentUser == null){"Log in"}else{"Log out"} )
+    val text: State<String> = _text
 
     fun onTextChange(newText: String){
-        _logInButtonText.value = newText
+        _text.value = newText
     }
 }
