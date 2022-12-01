@@ -5,10 +5,7 @@ import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import ram.groupfinder.model.Post
 import ram.groupfinder.model.User
-import ram.groupfinder.util.postFromDocument
-import ram.groupfinder.util.postsFromDocuments
-import ram.groupfinder.util.userFromDocument
-import ram.groupfinder.util.userToFBUser
+import ram.groupfinder.util.*
 
 fun userExists(userId : String): Boolean{
     var returnValue = false
@@ -106,7 +103,7 @@ fun getPostsByUser(userId: String): ArrayList<Post>{
 }
 
 fun createPost(post: Post){
-    Firebase.firestore.collection("posts").document().set(post).addOnCompleteListener { task ->
+    Firebase.firestore.collection("posts").document().set(postToFBPost(post)).addOnCompleteListener { task ->
         if(!task.isSuccessful){
             throw Exception(task.exception)
         }

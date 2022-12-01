@@ -6,7 +6,7 @@ import ram.groupfinder.view.components.SearchPage
 @Composable
 fun SearchPerson(){
     SearchPage(
-        title = "Search Person Page",
+        title = "Search Person",
         introduction = "Welcome to the person search page.\n" +
                 "To find a new group member near you, choose the area you wish to search for a person in. Then type in the field of interest of your group and relevant keywords to find the perfect new addition for your group.",
         searchInterestIntroText = "What kind of group member are you looking for?",

@@ -15,7 +15,7 @@ fun MyPosts(){
         modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center
     ){
         Text(
-            text = "My Posts Page",
+            text = "My Posts",
             fontSize = 30.sp,
             fontWeight = FontWeight.Bold
         )

@@ -1,23 +1,23 @@
 package ram.groupfinder.view.pages.create_post
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
-import androidx.compose.material.Button
-import androidx.compose.material.Checkbox
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import ram.groupfinder.view.components.PageTitle
-import ram.groupfinder.view.components.SearchBar
-import ram.groupfinder.view.components.TextField
+import ram.groupfinder.viewmodel.CreatePostViewModel
 
 @Composable
 fun CreatePost(){
+    val context = LocalContext.current
+    val viewModel: CreatePostViewModel = viewModel()
     Column (
         modifier = Modifier
             .verticalScroll(rememberScrollState())
@@ -25,55 +25,70 @@ fun CreatePost(){
             .padding(8.dp),
         verticalArrangement = Arrangement.spacedBy(10.dp)
     ) {
-        PageTitle(title = "Create Post Page")
-
-        Text(
-            text = "Create a new post describing what type of group you have or are looking to create. Make a good description and use specific keywords to get the best results. Your next group adventure starts now!",
-            modifier = Modifier.padding(vertical = 30.dp))
+        PageTitle(title = "Create Post")
 
         TextField(
-            labelText = "Title",
-            placeholderText = "E.g. Searching for band member",
-            textFieldSize = 0.87f)
+            value = viewModel.title.value,
+            onValueChange = {newText -> viewModel.onTitleChange(newText)},
+            label = { Text(text = "Title")},
+            placeholder = { Text(text = "E.g. Searching for band member")},
+        )
 
-        val isChecked = false
-        val checkedStateGroup = remember { mutableStateOf(isChecked) }
-        val checkedStatePerson = remember { mutableStateOf(isChecked) }
-        Text(text = "Are you searching for a whole group or a single person?")
+        Text(text = "Are you looking for a group or a member?")
         Row {
-            Checkbox(checked = checkedStateGroup.value,
-                onCheckedChange = {
-                    if (it) {
-                        checkedStateGroup.value = it
-                        checkedStatePerson.value = !it
+            Checkbox(checked = viewModel.isGroup.value,
+                onCheckedChange = { newValue ->
+                    if (newValue) {
+                        viewModel.onGroupChange(true)
+                        viewModel.onMemberChange(false)
                     }
                 })
             Text(text = "Group", modifier = Modifier.padding(12.dp))
-            Checkbox(checked = checkedStatePerson.value,
-                onCheckedChange = {
-                    if (it) {
-                        checkedStatePerson.value = it
-                        checkedStateGroup.value = !it
+            Checkbox(checked = viewModel.isMember.value,
+                onCheckedChange = { newValue ->
+                    if (newValue) {
+                        viewModel.onMemberChange(true)
+                        viewModel.onGroupChange(false)
                     }
                 })
-            Text(text = "Person", modifier = Modifier.padding(12.dp))
+            Text(text = "Member", modifier = Modifier.padding(12.dp))
         }
 
-        SearchBar(
-            labelText = "Keywords",
-            placeholderText = "E.g. xylophone, evenings, mondays") /* TODO: Each keyword should be listed when chosen */
-
-        SearchBar(
-            labelText = "Location",
-            placeholderText = "E.g. Birkum, Odense S, Fyn")
+        TextField(
+            value = viewModel.keywords.value,
+            onValueChange = {newText -> viewModel.onKeywordsChange(newText)},
+            label = { Text(text = "Keywords")},
+            placeholder = { Text(text = "E.g. xylophone, evenings, mondays")}
+        )
 
         TextField(
-            labelText = "Description",
-            placeholderText = "Describe who you are looking for",
-            textFieldSize = 0.87f)
+            value = viewModel.location.value,
+            onValueChange = {newText -> viewModel.onLocationChange(newText)},
+            label = { Text(text = "Location")},
+            placeholder = { Text(text = "E.g. Birkum, Odense S, Fyn")}
+        )
+
+        TextField(
+            value = viewModel.description.value,
+            onValueChange = {newText -> viewModel.onDescriptionChange(newText)},
+            label = { Text(text = "Description")},
+            placeholder = { Text(text = "Make a text for your post")},
+        )
 
         Button(
-            onClick = { /*TODO*/ },
+            onClick = {
+                if(viewModel.valuesAreValid()) {
+                    if (viewModel.createPost()) {
+                        Toast.makeText(context, "Post created", Toast.LENGTH_LONG).show()
+                        viewModel.reset()
+                    } else {
+                        Toast.makeText(context, "Failed to create post", Toast.LENGTH_LONG).show()
+                    }
+                }else{
+                    Toast.makeText(context, "Fields are missing data", Toast.LENGTH_LONG).show()
+                }
+
+            },
             modifier = Modifier
                 .align(alignment = Alignment.CenterHorizontally)
                 .paddingFromBaseline(bottom = 80.dp)

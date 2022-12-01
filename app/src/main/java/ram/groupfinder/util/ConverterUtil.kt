@@ -1,5 +1,6 @@
 package ram.groupfinder.util
 
+import com.google.firebase.Timestamp
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentSnapshot
 import ram.groupfinder.model.Post
@@ -13,6 +14,26 @@ data class FBUser(
     val phoneNumber: Number?,
     val image: String?
     )
+
+data class FBPost(
+    val title: String?,
+    val description: String?,
+    val userId: String?,
+    val date: Timestamp?,
+    val keywords: List<String>?,
+    val isGroupPost: Boolean?,
+    val picture: String?,
+    val location: String?
+)
+
+fun stringListToLowercase(list: List<String>): List<String>{
+
+    val newList = mutableListOf<String>()
+    for (string: String in list){
+        newList.add(string.lowercase())
+    }
+    return newList.toList()
+}
 
 fun userFromFirebaseUser(firebaseUser: FirebaseUser): User {
     return User(
@@ -41,6 +62,10 @@ fun userFromDocument(document: DocumentSnapshot): User {
     }
 }
 
+fun userToFBUser(user: User): FBUser {
+    return FBUser(user.email, user.firstName, user.lastName, user.phoneNumber, user.image)
+}
+
 fun postFromDocument(document: DocumentSnapshot): Post {
     val data = document.data
     return if (data != null) {
@@ -49,8 +74,8 @@ fun postFromDocument(document: DocumentSnapshot): Post {
             data["title"] as String,
             data["description"] as String,
             data["userId"] as String,
-            data["date"] as Date,
-            data["tags"] as Array<String>,
+            data["date"] as Timestamp,
+            data["tags"] as List<String>,
             data["isGroupPost"] as Boolean,
             data["image"] as String,
             data["location"] as String,
@@ -68,6 +93,7 @@ fun postsFromDocuments(documents: List<DocumentSnapshot>): ArrayList<Post> {
     return posts
 }
 
-fun userToFBUser(user: User): FBUser {
-    return FBUser(user.email, user.firstName, user.lastName, user.phoneNumber, user.image)
+fun postToFBPost(post: Post): FBPost{
+    return FBPost(post.title, post.description, post.userId, post.date, post.keywords, post.isGroupPost, post.picture, post.location)
 }
+

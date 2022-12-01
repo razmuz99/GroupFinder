@@ -29,7 +29,7 @@ fun Profile(navController : NavController, deleteAccount: () -> Unit, signOut: (
                 .padding(8.dp),
                 horizontalArrangement = Arrangement.Center) {
                 Text(
-                    text = "Profile Page",
+                    text = "Profile",
                     textAlign = TextAlign.Center,
                     fontSize = 30.sp,
                     fontWeight = FontWeight.Bold
