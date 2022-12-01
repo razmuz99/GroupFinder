@@ -28,7 +28,6 @@ fun Profile(navController : NavController, deleteAccount: () -> Unit, signOut: (
     val user : User
     if (fbUser != null){
         userID = fbUser.uid
-        user = getUser(userID)
     }
     else{
         user = User("", null, null, null,null,null,)
@@ -54,9 +53,8 @@ fun Profile(navController : NavController, deleteAccount: () -> Unit, signOut: (
                     fontWeight = FontWeight.Bold
                 )
             }
-            ProfileInfo(user)
+            //ProfileInfo(user)
             Options(navController, deleteAccount, signOut)
-
         }
     }
 }

@@ -32,10 +32,16 @@ fun CreatePost(){
             onValueChange = {newText -> viewModel.onTitleChange(newText)},
             label = { Text(text = "Title")},
             placeholder = { Text(text = "E.g. Searching for band member")},
+            modifier = Modifier.fillMaxWidth().padding(15.dp, 5.dp)
         )
 
-        Text(text = "Are you looking for a group or a member?")
-        Row {
+        Text(
+            text = "Are you looking for a group or a member?",
+            modifier = Modifier.align(alignment = Alignment.CenterHorizontally).padding(15.dp, 5.dp)
+        )
+        Row(
+            modifier = Modifier.align(alignment = Alignment.CenterHorizontally).padding(15.dp, 5.dp)
+        ) {
             Checkbox(checked = viewModel.isGroup.value,
                 onCheckedChange = { newValue ->
                     if (newValue) {
@@ -57,15 +63,17 @@ fun CreatePost(){
         TextField(
             value = viewModel.keywords.value,
             onValueChange = {newText -> viewModel.onKeywordsChange(newText)},
-            label = { Text(text = "Keywords")},
-            placeholder = { Text(text = "E.g. xylophone, evenings, mondays")}
+            label = { Text(text = "Keywords (Comma separated)")},
+            placeholder = { Text(text = "Others can find your post from these")},
+            modifier = Modifier.fillMaxWidth().padding(15.dp, 5.dp)
         )
 
         TextField(
             value = viewModel.location.value,
             onValueChange = {newText -> viewModel.onLocationChange(newText)},
             label = { Text(text = "Location")},
-            placeholder = { Text(text = "E.g. Birkum, Odense S, Fyn")}
+            placeholder = { Text(text = "E.g. Birkum, Odense S, Fyn")},
+            modifier = Modifier.fillMaxWidth().padding(15.dp, 5.dp)
         )
 
         TextField(
@@ -73,6 +81,7 @@ fun CreatePost(){
             onValueChange = {newText -> viewModel.onDescriptionChange(newText)},
             label = { Text(text = "Description")},
             placeholder = { Text(text = "Make a text for your post")},
+            modifier = Modifier.fillMaxWidth().padding(15.dp, 5.dp)
         )
 
         Button(
@@ -92,6 +101,8 @@ fun CreatePost(){
             modifier = Modifier
                 .align(alignment = Alignment.CenterHorizontally)
                 .paddingFromBaseline(bottom = 80.dp)
+                .width(200.dp)
+                .height(50.dp)
         ) {
             Text(text = "Create post")
         }

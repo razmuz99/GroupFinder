@@ -63,7 +63,7 @@ class CreatePostViewModel: ViewModel() {
     }
 
     fun createPost(): Boolean{
-        val keywords = keywords.value.split(", ")
+        val keywords = keywords.value.split(", ", " ")
         val post = Post(
             postId = "",
             title = title.value,

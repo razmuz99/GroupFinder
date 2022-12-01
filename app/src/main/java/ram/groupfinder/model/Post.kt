@@ -1,9 +1,8 @@
 package ram.groupfinder.model
 
-import java.util.*
 import com.google.firebase.Timestamp
 
-data class Post (
+data class Post(
     val postId: String?,
     val title: String?,
     val description: String?,

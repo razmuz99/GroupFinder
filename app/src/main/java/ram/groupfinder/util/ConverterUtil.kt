@@ -5,7 +5,6 @@ import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.firestore.DocumentSnapshot
 import ram.groupfinder.model.Post
 import ram.groupfinder.model.User
-import java.util.Date
 
 data class FBUser(
     val email: String?,
@@ -70,14 +69,14 @@ fun postFromDocument(document: DocumentSnapshot): Post {
     val data = document.data
     return if (data != null) {
         Post(
-            data["postId"] as String,
+            document.id,
             data["title"] as String,
             data["description"] as String,
             data["userId"] as String,
             data["date"] as Timestamp,
-            data["tags"] as List<String>,
-            data["isGroupPost"] as Boolean,
-            data["image"] as String,
+            data["keywords"] as ArrayList<String>,
+            data["groupPost"] as Boolean,
+            data["picture"] as String,
             data["location"] as String,
         )
     }else{
@@ -86,7 +85,7 @@ fun postFromDocument(document: DocumentSnapshot): Post {
 }
 
 fun postsFromDocuments(documents: List<DocumentSnapshot>): ArrayList<Post> {
-    var posts = arrayListOf<Post>()
+    val posts = arrayListOf<Post>()
     for(document: DocumentSnapshot in documents){
         posts.add(postFromDocument(document))
     }

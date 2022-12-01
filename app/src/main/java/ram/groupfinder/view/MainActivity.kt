@@ -25,11 +25,13 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.google.firebase.auth.FirebaseAuth
 import ram.groupfinder.database.createUser
 import ram.groupfinder.database.isAuthorised
-import ram.groupfinder.database.userExists
 import ram.groupfinder.database.*
 import ram.groupfinder.view.nav.BottomNavigationBar
 import ram.groupfinder.view.nav.Navigation
 import ram.groupfinder.model.BottomNavItem
+import ram.groupfinder.model.User
+import ram.groupfinder.util.postsFromDocuments
+import ram.groupfinder.util.userFromDocument
 import ram.groupfinder.view.theme.GroupFinderTheme
 import ram.groupfinder.util.userFromFirebaseUser
 import ram.groupfinder.viewmodel.MainViewModel
@@ -44,35 +46,34 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
-        var signedIn: Boolean
         if (result.resultCode == RESULT_OK) {
             // Successfully signed in
-            val user = FirebaseAuth.getInstance().currentUser
-            if (user != null) {
-                if(userExists(user.uid)) {
-                    signedIn = true
-                }else{
-                    try{
-                        createUser(userFromFirebaseUser(user))
-                        signedIn = true
-                    }
-                    catch (e: Exception){
-                        signedIn = false
-                        signOut()
+            val fbUser = FirebaseAuth.getInstance().currentUser
+            if(fbUser != null){
+                getUser(fbUser.uid).addOnCompleteListener { task ->
+                    if(task.isComplete && task.result.exists()){
+                        viewModel.onTextChange("Log out")
+                        Toast.makeText(this, "Sign in successful", Toast.LENGTH_LONG).show()
+                    }else{
+                        try{
+                            createUser(userFromFirebaseUser(fbUser))
+                            viewModel.onTextChange("Log out")
+                            Toast.makeText(this, "Sign in successful", Toast.LENGTH_LONG).show()
+                        }
+                        catch (e: Exception){
+                            viewModel.onTextChange("Log in")
+                            Toast.makeText(this, "Sign in failed", Toast.LENGTH_LONG).show()
+                            signOut()
+                        }
                     }
                 }
             }else{
-                signedIn = false
+                viewModel.onTextChange("Log in")
+                Toast.makeText(this, "Sign in failed", Toast.LENGTH_LONG).show()
                 signOut()
             }
         } else {
             //Failed sign in
-            signedIn = false
-        }
-        if(signedIn){
-            viewModel.onTextChange("Log out")
-            Toast.makeText(this, "Sign in successful", Toast.LENGTH_LONG).show()
-        }else{
             viewModel.onTextChange("Log in")
             Toast.makeText(this, "Sign in failed", Toast.LENGTH_LONG).show()
         }
