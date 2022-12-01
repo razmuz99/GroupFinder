@@ -22,10 +22,10 @@ import ram.groupfinder.view.theme.GreenGrey30
 import ram.groupfinder.view.theme.Shapes
 import java.util.Date
 
-var title = "tit"
-var date = "dat"
-var location = "loc"
-var desc = "desc test"
+var title = ""
+var date = ""
+var location = ""
+var desc = ""
 
 @Composable
 fun PostListItem(post: Post){
