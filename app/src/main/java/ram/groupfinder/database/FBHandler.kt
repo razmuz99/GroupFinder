@@ -1,6 +1,8 @@
 package ram.groupfinder.database
 
+import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.QuerySnapshot
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import ram.groupfinder.model.Post
@@ -134,5 +136,9 @@ fun isAuthorised(): Boolean{
     return FirebaseAuth.getInstance().currentUser != null
 }
 
+fun searchResult(field: String, userQuery: List<String>): Task<QuerySnapshot> {
+    val searchPostRef = Firebase.firestore.collection("posts")
 
+    return searchPostRef.whereArrayContainsAny(field, userQuery).get()
+}
 
