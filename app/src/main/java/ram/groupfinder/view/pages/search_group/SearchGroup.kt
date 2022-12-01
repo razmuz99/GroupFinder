@@ -9,6 +9,7 @@ fun SearchGroup(){
         title = "Search Group",
         searchInterestIntroText = "What kind of group are you looking for?",
         searchInterestLabelText = "Field of interest",
-        searchInterestPlaceholderText = "\"(E.g clarinet, band, music)\""
+        searchInterestPlaceholderText = "\"(E.g clarinet, band, music)\"",
+        isGroupSearch = true
     )
 }

@@ -8,6 +8,7 @@ import com.google.firebase.auth.FirebaseAuth
 import ram.groupfinder.database.createPost
 import ram.groupfinder.model.Post
 import ram.groupfinder.util.stringListToLowercase
+import ram.groupfinder.util.stringToKeywords
 import java.time.LocalDateTime
 import java.time.ZoneId
 import java.util.Date
@@ -63,7 +64,7 @@ class CreatePostViewModel: ViewModel() {
     }
 
     fun createPost(): Boolean{
-        val keywords = keywords.value.split(", ", " ")
+        val keywords = stringToKeywords(keywords.value)
         val post = Post(
             postId = "",
             title = title.value,
