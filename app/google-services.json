@@ -22,6 +22,14 @@
           }
         },
         {
+          "client_id": "816627006046-c1gahs7gs16lqu1kjn2ru0kl3hdo6ord.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "ram.groupfinder",
+            "certificate_hash": "8d8b77b85c4ce9f0c0365f0fc8e4e4d37349a588"
+          }
+        },
+        {
           "client_id": "816627006046-mn3ditfftshg45hkv59onb2h2cqua3iv.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
