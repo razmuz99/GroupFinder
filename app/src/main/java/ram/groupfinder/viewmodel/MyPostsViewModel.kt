@@ -5,6 +5,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import ram.groupfinder.database.getPostsByUser
 import ram.groupfinder.model.Post
+import ram.groupfinder.model.User
 import ram.groupfinder.util.postsFromDocuments
 
 class MyPostsViewModel : ViewModel() {
@@ -16,8 +17,8 @@ class MyPostsViewModel : ViewModel() {
         _myPosts.value = newList
     }
 
-    fun getMyPosts(){
-        val _task = getPostsByUser("asfsa")
+    fun getMyPosts(userId: String){
+        val _task = getPostsByUser(userId)
         _task.addOnCompleteListener { task ->
             val result = task.result
             if(task.isSuccessful){
