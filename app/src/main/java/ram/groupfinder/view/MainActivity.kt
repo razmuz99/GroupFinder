@@ -159,7 +159,7 @@ private fun MainScreen(createSignInIntent: () -> Unit, signOut: () -> Unit, view
                                     }
                                 }
                             ){
-                                Text(text = viewModel.text.value)
+                                Text(text = viewModel.logInButtonText.value)
                             }
                         }
                     }
