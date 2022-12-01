@@ -96,3 +96,10 @@ fun postToFBPost(post: Post): FBPost{
     return FBPost(post.title, post.description, post.userId, post.date, post.keywords, post.isGroupPost, post.picture, post.location)
 }
 
+fun stringToKeywords(string: String): List<String>{
+    val strings = string.split(", ", " ")
+    return stringListToLowercase(strings)
+}
+
+
+

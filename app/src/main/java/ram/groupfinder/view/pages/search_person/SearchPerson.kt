@@ -9,6 +9,7 @@ fun SearchPerson(){
         title = "Search Person",
         searchInterestIntroText = "What kind of member are you looking for?",
         searchInterestLabelText = "Field of interest",
-        searchInterestPlaceholderText = "\"(E.g clarinet player, band, music)\""
+        searchInterestPlaceholderText = "\"(E.g clarinet player, band, music)\"",
+        isGroupSearch = false
     )
 }
