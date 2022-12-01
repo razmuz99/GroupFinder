@@ -1,5 +1,6 @@
 package ram.groupfinder.view.pages.profile
 
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Button
@@ -13,12 +14,30 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import coil.compose.rememberAsyncImagePainter
 import com.google.firebase.auth.FirebaseAuth
-import ram.groupfinder.R
 import ram.groupfinder.database.deleteUser
+import ram.groupfinder.database.getUser
+import ram.groupfinder.model.User
+import ram.groupfinder.util.getFullName
 
 @Composable
 fun Profile(navController : NavController, deleteAccount: () -> Unit, signOut: () -> Unit){
+    val fbUser = FirebaseAuth.getInstance().currentUser
+    val userID: String
+    val user : User
+    if (fbUser != null){
+        userID = fbUser.uid
+        user = getUser(userID)
+    }
+    else{
+        user = User("", null, null, null,null,null,)
+    }
+
+
+
+    //FirebaseAuth.getInstance().currentUser != null
+
     Box(
         modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter
     ){
@@ -35,91 +54,78 @@ fun Profile(navController : NavController, deleteAccount: () -> Unit, signOut: (
                     fontWeight = FontWeight.Bold
                 )
             }
-            ProfileImage()
-            Options(navController)
-            Button(
+            ProfileInfo(user)
+            Options(navController, deleteAccount, signOut)
 
-                onClick = {
-                    deleteAccount()
-                    signOut()
-                    FirebaseAuth.getInstance().currentUser?.let { deleteUser(it.uid) }
-                }
-            ){
-                Text(text = "Delete account")
+        }
+    }
+}
+@Composable
+fun ProfileInfo(user: User){
+
+    Column(modifier = Modifier.fillMaxWidth()
+    ) {
+        // Card of the User's profile picture
+        Column(modifier = Modifier
+            .fillMaxWidth(),
+            horizontalAlignment = Alignment.CenterHorizontally) {
+            Card(shape = CircleShape,
+                modifier = Modifier
+                    .padding(8.dp)
+                    .size(150.dp)
+            ) {
+                Image(
+                    painter = rememberAsyncImagePainter(user.image),
+                    contentDescription = null,
+                    modifier = Modifier
+                )
             }
         }
-    }
-}
-@Composable
-fun ProfileImage(){
-  //  val private
-//    private imageview
-    //StoreReference storageReference
-    //val imageUri = rememberSaveable { mutableStateOf("") }
-    val painter = R.drawable.ic_user
-    /*rememberPainter(
-    if (imageUri.value.isEmpty())
-        R.drawable.ic_user
-    else
-        imageUri.value
-)
-     */
 
-
-    Column(modifier = Modifier
-        .padding(8.dp)
-        .fillMaxWidth(),
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Card(shape = CircleShape,
-            modifier = Modifier
-                .padding(8.dp)
-                .size(100.dp)
+        // Personal info from User.
+        Column(modifier = Modifier
+            .padding(vertical = 20.dp, horizontal = 60.dp)
+            .fillMaxWidth()
         ) {
-            /*  Image(
-                  painter = painter,
-                  contentDescription = null,
-                  modifier = Modifier.wrapContentSize(),//.clickable {  },
-                  contentScale = ContentScale.Crop
-              )*/
+            Text(text = getFullName(user), textAlign = TextAlign.Left)
+            Text(text = if(user.email != null){user.email.toString()}else{"No email provided"})
+            Text(text = if(user.phoneNumber != null){user.phoneNumber.toString()}else{"No phone number provided"})
+
         }
-        Text(text = "Profile picture missing")
+
+
+
+
 
     }
-
 }
 
 @Composable
-fun Options(navController : NavController){
+fun Options(navController : NavController, deleteAccount: () -> Unit, signOut: () -> Unit){
 
     Column(modifier = Modifier
         .fillMaxWidth()
-        .padding(8.dp) ,
-        horizontalAlignment = Alignment.CenterHorizontally) {
-        Button(onClick = { /*TODO*/ },) {
-            Text(text = "Log out")
-        }
-        Button(onClick = { navController.navigate("myPosts") }) {
+        .padding(vertical = 10.dp/*, horizontal = 100.dp*/),
+        horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+        Button(onClick = { navController.navigate("myPosts") }, modifier = Modifier.defaultMinSize(minWidth = 175.dp)) {
             Text(text = "View posts")
-            //related to composeable("myposts"){ MyPosts()}
         }
-        Button(onClick = { /*TODO*/ }) {
+
+        /*Button(onClick = { *//*TODO*//* }, modifier = Modifier.defaultMinSize(minWidth = 175.dp)) {
             Text(text = "Edit Information")
 
+        }*/
+
+        Button(
+
+            onClick = {
+                deleteAccount()
+                signOut()
+                FirebaseAuth.getInstance().currentUser?.let { deleteUser(it.uid) }
+            }, modifier = Modifier.defaultMinSize(minWidth = 175.dp)
+        ){
+            Text(text = "Delete account")
         }
     }
 }
-/*
-Knapper:
-Mine opslag.
-Rediger informationer.
-Log ud.
-
-profil indhold:
-    private Imageview profil billede Fra URL givet google konto log in.
-    private string navn.
-    private string number.
-    - mail.
-
-
-*/

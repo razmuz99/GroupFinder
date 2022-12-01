@@ -54,7 +54,7 @@ fun userFromDocument(document: DocumentSnapshot): User {
             data["email"] as String?,
             data["firstName"] as String?,
             data["lastName"] as String?,
-            data["phoneNumber"] as Int,
+            data["phoneNumber"] as Int?,
             data["image"] as String?
         )
     }else{
