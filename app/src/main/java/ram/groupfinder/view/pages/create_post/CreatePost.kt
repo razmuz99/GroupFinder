@@ -10,12 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ram.groupfinder.view.components.PageTitle
 import ram.groupfinder.view.components.SearchBar
 import ram.groupfinder.view.components.TextField
 
+@ExperimentalComposeUiApi
 @Composable
 fun CreatePost(){
     Column (

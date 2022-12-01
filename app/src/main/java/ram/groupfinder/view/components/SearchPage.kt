@@ -47,6 +47,10 @@ fun SearchPage (
             labelText = searchInterestLabelText,
             placeholderText = searchInterestPlaceholderText
         )
+
+        var hasInquired = false
+
+
     }
 }
 

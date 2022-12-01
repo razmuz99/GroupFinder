@@ -1,11 +1,14 @@
 package ram.groupfinder.view.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
 import androidx.compose.runtime.*
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.TextFieldValue
@@ -21,6 +24,7 @@ Labels and placeholders.
  * TextField is a reusable component with optional label and placeholder
  * It is used in SearchBar.kt
  * */
+@ExperimentalComposeUiApi // For keyboardController
 @Composable
 fun TextField (
     labelText: String?,
@@ -28,7 +32,7 @@ fun TextField (
     textFieldSize: Float
 ) {
     var text by remember { mutableStateOf(TextFieldValue("")) }
-    //val keyboardController = LocalSoftwareKeyboardController.current // experimental
+    val keyboardController = LocalSoftwareKeyboardController.current // experimental
 
     TextField(
         modifier = Modifier.fillMaxWidth(textFieldSize),
@@ -48,9 +52,12 @@ fun TextField (
             keyboardType = KeyboardType.Text, // permits all types of text
             imeAction = ImeAction.Search // makes a search icon in lower right corner of keyboard
         ),
-        /* KeyboardActions(
-            onSearch = { TODO: Implement search }
-        ) */
+        keyboardActions = KeyboardActions(
+            onDone = {
+                keyboardController?.hide()
+            },
+            onSearch = { /*TODO: Implement search*/ }
+        )
     )
 }
 

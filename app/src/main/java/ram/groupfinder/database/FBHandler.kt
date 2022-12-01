@@ -1,5 +1,6 @@
 package ram.groupfinder.database
 
+import android.util.Log
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
@@ -134,5 +135,33 @@ fun isAuthorised(): Boolean{
     return FirebaseAuth.getInstance().currentUser != null
 }
 
+fun searchResult(field: String, userQuery: String) {
+    val searchPost = Firebase.firestore.collection("posts")
+    val searchPostRef = Firebase.firestore.collection("posts")
+    val querySearch = searchPostRef.whereEqualTo(field, userQuery)
 
+    searchPostRef.whereArrayContainsAny(field, listOf(userQuery))
+
+/*val cities = db.collection("cities")
+// Create a reference to the cities collection
+val citiesRef = db.collection("cities")
+// Create a query against the collection.
+val query = citiesRef.whereEqualTo("location", "CA")
+
+db.collection("cities")
+    .whereEqualTo("capital", true)
+    .get()
+    .addOnSuccessListener { documents ->
+        for (document in documents) {
+            Log.d(TAG, "${document.id} => ${document.data}")
+        }
+    }
+    .addOnFailureListener { exception ->
+        Log.w(TAG, "Error getting documents: ", exception)
+    }*/
+    /*Firebase.firestore.collection("posts")
+    .whereEqualTo("title", true)
+    .get()
+    .addOnSuccessListener*/
+}
 

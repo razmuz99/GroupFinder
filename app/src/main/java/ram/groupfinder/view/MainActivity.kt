@@ -11,6 +11,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.*
 import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
@@ -34,6 +35,7 @@ import ram.groupfinder.view.theme.GroupFinderTheme
 import ram.groupfinder.util.userFromFirebaseUser
 import ram.groupfinder.viewmodel.MainViewModel
 
+@ExperimentalComposeUiApi
 class MainActivity : ComponentActivity() {
     private val viewModel: MainViewModel by viewModels()
 
@@ -125,6 +127,7 @@ class MainActivity : ComponentActivity() {
     }
 }
 
+@ExperimentalComposeUiApi
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 private fun MainScreen(createSignInIntent: () -> Unit, signOut: () -> Unit, viewModel: MainViewModel, deleteAccount: () -> Unit) {
@@ -201,6 +204,7 @@ private fun MainScreen(createSignInIntent: () -> Unit, signOut: () -> Unit, view
     }
 }
 
+@ExperimentalComposeUiApi
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {

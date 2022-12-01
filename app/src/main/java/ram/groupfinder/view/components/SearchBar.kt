@@ -7,12 +7,14 @@ import androidx.compose.material.IconButton
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 
 /**
  * Search bar is made of TextField() with a clickable IconButton with search function.
  * It is used in SearchPage.kt
  * */
+@OptIn(ExperimentalComposeUiApi::class)
 @Composable
 fun SearchBar (
     labelText: String?,

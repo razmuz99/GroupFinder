@@ -1,6 +1,7 @@
 package ram.groupfinder.view.nav
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -10,6 +11,7 @@ import ram.groupfinder.view.pages.profile.Profile
 import ram.groupfinder.view.pages.search_group.SearchGroup
 import ram.groupfinder.view.pages.search_person.SearchPerson
 
+@ExperimentalComposeUiApi
 @Composable
 fun Navigation(navController: NavHostController, deleteAccount: () -> Unit, signOut: () -> Unit){
     NavHost(navController = navController, startDestination = "searchGroup"){
