@@ -36,7 +36,10 @@ fun SearchPage (
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        Text(text = searchInterestIntroText)
+        Text(
+            text = searchInterestIntroText,
+            modifier = Modifier.padding(15.dp, 5.dp)
+        )
         TextField(
             value = viewModel.keywords.value,
             onValueChange = {newText -> viewModel.onKeywordsChange(newText)},
