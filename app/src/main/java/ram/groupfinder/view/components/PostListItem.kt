@@ -42,15 +42,11 @@ fun PostListItem(post: Post) {
             post.description?.let { Text(text = "Description:\n$it") }
 
             //if (FirebaseAuth.getInstance().currentUser != null) {
-            Spacer(modifier = Modifier.height(15.dp))
-            Text(text = "Contact information:", fontWeight = FontWeight.Bold)
-            var contactPhone = Text(text = "Phonenumber: " + "")
-            var contactEmail = Text(text = "Email: " + "")
+                Spacer(modifier = Modifier.height(15.dp))
+                Text(text = "Contact information:", fontWeight = FontWeight.Bold)
+                var contactPhone = Text(text = "Phonenumber: " + "")
+                var contactEmail = Text(text = "Email: " + "")
             //}
-            /*if (FirebaseAuth.getInstance().currentUser != null) {
-                contactPhone = "Phonenumber: " + user.phoneNumber
-                contactEmail = "Email: " + user.email
-            }*/
         }
     }
 }
