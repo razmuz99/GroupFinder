@@ -36,7 +36,10 @@ fun SearchPage (
 
         Spacer(modifier = Modifier.height(10.dp))
 
-        Text(text = searchInterestIntroText)
+        Text(
+            text = searchInterestIntroText,
+            modifier = Modifier.padding(15.dp, 5.dp)
+        )
         TextField(
             value = viewModel.keywords.value,
             onValueChange = {newText -> viewModel.onKeywordsChange(newText)},
@@ -55,15 +58,14 @@ fun SearchPage (
         }
         Box(modifier = Modifier
             .fillMaxWidth()
-            .padding(bottom = 60.dp)){
-            val fBUser = FirebaseAuth.getInstance().currentUser
-            if(fBUser != null){
-                LazyColumn(Modifier.fillMaxWidth()){
-                    items(viewModel.posts.value) { post ->
-                        PostListItem(post = post)
-                    }
+            .padding(bottom = 60.dp)
+        ){
+            LazyColumn(Modifier.fillMaxWidth()){
+                items(viewModel.posts.value) { post ->
+                    PostListItem(post = post)
                 }
             }
+
         }
     }
 }
