@@ -68,7 +68,7 @@ fun PostListItem(post: Post){
         Column(modifier = Modifier, Arrangement.SpaceBetween) {
             getUser(post.userId!!).addOnCompleteListener { Task ->
                 if(Task.isSuccessful) {
-                    var user = userFromDocument(Task.result)
+                    val user = userFromDocument(Task.result)
 
                     post.title?.let { title = "YAY" + it }
                     post.date?.let { date = "YAYDate: $it" }

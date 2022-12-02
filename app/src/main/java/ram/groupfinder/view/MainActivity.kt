@@ -13,9 +13,11 @@ import androidx.compose.material.icons.filled.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.firebase.ui.auth.AuthUI
 import com.firebase.ui.auth.FirebaseAuthUIActivityResultContract
@@ -129,6 +131,7 @@ class MainActivity : ComponentActivity() {
 @SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 private fun MainScreen(createSignInIntent: () -> Unit, signOut: () -> Unit, viewModel: MainViewModel, deleteAccount: () -> Unit) {
+    val context = LocalContext.current
     val systemUiController: SystemUiController = rememberSystemUiController()
     systemUiController.isStatusBarVisible = true
     systemUiController.setStatusBarColor(MaterialTheme.colors.primary)
@@ -156,6 +159,7 @@ private fun MainScreen(createSignInIntent: () -> Unit, signOut: () -> Unit, view
                                     if(!isAuthorised()){
                                         createSignInIntent()
                                     }else{
+                                        navController.navigate("searchGroup")
                                         signOut()
                                     }
                                 }
@@ -193,7 +197,12 @@ private fun MainScreen(createSignInIntent: () -> Unit, signOut: () -> Unit, view
             ),
                 navController = navController,
                 onItemClick = {
-                    navController.navigate(it.route)
+                    if((it.route == "profile" || it.route == "createPost") && !isAuthorised()){
+                        Toast.makeText(context, "Log in to view this page", Toast.LENGTH_LONG).show()
+                    }else{
+                        navController.navigate(it.route)
+                    }
+
                 }
             )
         }

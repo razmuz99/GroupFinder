@@ -14,16 +14,21 @@ fun getUser(userId : String): Task<DocumentSnapshot> {
     return Firebase.firestore.collection("users").document(userId).get()
 }
 
-fun editUser(user: User){
-    try{
-        createUser(user)
-    } catch (e: Exception){
-        throw e
-    }
-}
-
 fun searchResult(userQuery: List<String>, isGroupSearch: Boolean): Task<QuerySnapshot> {
-    return Firebase.firestore.collection("posts").whereArrayContainsAny("keywords", userQuery).whereEqualTo("groupPost", isGroupSearch).get()
+    val user = FirebaseAuth.getInstance().currentUser
+    return if(user != null){
+        Firebase.firestore.collection("posts")
+            .whereEqualTo("groupPost", isGroupSearch)
+            .whereNotEqualTo("userId", user.uid)
+            .whereArrayContainsAny("keywords", userQuery)
+            .get()
+    }else{
+        Firebase.firestore.collection("posts")
+            .whereEqualTo("groupPost", isGroupSearch)
+            .whereArrayContainsAny("keywords", userQuery)
+            .get()
+    }
+
 }
 
 fun createUser(user: User){
@@ -37,10 +42,6 @@ fun createUser(user: User){
 
 fun deleteUser(userId: String){
     Firebase.firestore.collection("users").document(userId).delete()
-}
-
-fun getPost(postId: String): Task<DocumentSnapshot> {
-    return Firebase.firestore.collection("posts").document(postId).get()
 }
 
 fun getPostsByUser(userId: String): Task<QuerySnapshot> {
