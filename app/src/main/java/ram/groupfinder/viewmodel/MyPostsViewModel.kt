@@ -18,8 +18,7 @@ class MyPostsViewModel : ViewModel() {
     }
 
     fun getMyPosts(userId: String){
-        val _task = getPostsByUser(userId)
-        _task.addOnCompleteListener { task ->
+        getPostsByUser(userId).addOnCompleteListener { task ->
             val result = task.result
             if(task.isSuccessful){
                 onMyPostsChange(postsFromDocuments(result.documents))
@@ -27,8 +26,3 @@ class MyPostsViewModel : ViewModel() {
         }
     }
 }
-
-/*
-    Myposts består af, en liste af posts tilhørende den user der er logget ind.
-
- */

@@ -14,7 +14,7 @@ fun getUser(userId : String): Task<DocumentSnapshot> {
     return Firebase.firestore.collection("users").document(userId).get()
 }
 
-fun searchResult(userQuery: List<String>, isGroupSearch: Boolean): Task<QuerySnapshot> {
+fun searchPosts(userQuery: List<String>, isGroupSearch: Boolean): Task<QuerySnapshot> {
     val user = FirebaseAuth.getInstance().currentUser
     return if(user != null){
         Firebase.firestore.collection("posts")
@@ -58,6 +58,21 @@ fun createPost(post: Post){
 
 fun deletePost(postId: String){
     Firebase.firestore.collection("posts").document(postId).delete()
+}
+
+fun deletePostsByUser(userId: String){
+    getPostsByUser(userId).addOnCompleteListener { task ->
+        val result = task.result
+        if(task.isSuccessful){
+            val posts = postsFromDocuments(result.documents)
+
+            for(post: Post in posts){
+                post.postId?.let { deletePost(it) }
+            }
+        }
+    }
+
+
 }
 
 fun isAuthorised(): Boolean{

@@ -10,7 +10,7 @@ import ram.groupfinder.util.userFromDocument
 import ram.groupfinder.view.pages.profile.ProfileInfo
 
 class ProfileViewModel: ViewModel() {
-    private val _user = mutableStateOf(User("", null, null, null,null,null,))
+    private val _user = mutableStateOf(User("", "", "", "",null,"",))
     val user: State<User> = _user
 
     fun onUserChange(user: User){

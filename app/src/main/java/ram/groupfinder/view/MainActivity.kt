@@ -25,6 +25,7 @@ import com.firebase.ui.auth.data.model.FirebaseAuthUIAuthenticationResult
 import com.google.accompanist.systemuicontroller.SystemUiController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.google.firebase.auth.FirebaseAuth
+import ram.groupfinder.R
 import ram.groupfinder.database.createUser
 import ram.groupfinder.database.isAuthorised
 import ram.groupfinder.database.*
@@ -84,7 +85,8 @@ class MainActivity : ComponentActivity() {
     private fun createSignInIntent() {
         // Choose authentication providers
         val providers = arrayListOf(
-            AuthUI.IdpConfig.GoogleBuilder().build())
+            AuthUI.IdpConfig.GoogleBuilder().build()
+            )
 
         // Create and launch sign-in intent
         val signInIntent = AuthUI.getInstance()
@@ -104,12 +106,17 @@ class MainActivity : ComponentActivity() {
     }
 
     private fun delete() {
-        AuthUI.getInstance()
-            .delete(this)
-            .addOnCompleteListener {
-                viewModel.onTextChange("Log in")
-                Toast.makeText(this, "GroupFinder account deleted", Toast.LENGTH_LONG).show()
-            }
+        val fbUser = FirebaseAuth.getInstance().currentUser
+        if(fbUser != null ){
+            deletePostsByUser(fbUser.uid)
+            AuthUI.getInstance()
+                .delete(this)
+                .addOnCompleteListener {
+                    viewModel.onTextChange("Log in")
+                    Toast.makeText(this, "GroupFinder account deleted", Toast.LENGTH_LONG).show()
+                }
+        }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

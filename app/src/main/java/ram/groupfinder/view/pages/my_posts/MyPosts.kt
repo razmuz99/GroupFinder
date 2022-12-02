@@ -16,16 +16,13 @@ import ram.groupfinder.viewmodel.MyPostsViewModel
 @Composable
 fun MyPosts(){
     val viewModel: MyPostsViewModel = viewModel()
-
-
+    val fBUser = FirebaseAuth.getInstance().currentUser
+    if(fBUser != null){
+        viewModel.getMyPosts(fBUser.uid)
+    }
     Box(modifier = Modifier.fillMaxSize().padding(bottom = 60.dp), contentAlignment = Alignment.TopCenter){
         Column(modifier = Modifier.fillMaxWidth().padding(10.dp)) {
             PageTitle(title = "My Posts")
-
-            val fBUser = FirebaseAuth.getInstance().currentUser
-            if(fBUser != null){
-                viewModel.getMyPosts(fBUser.uid)
-            }
             LazyColumn(modifier = Modifier.fillMaxWidth(), verticalArrangement = Arrangement.spacedBy(10.dp)){
                 items(viewModel.myPosts.value) { post ->
                     PostListItem(post = post)
@@ -33,7 +30,6 @@ fun MyPosts(){
             }
         }
     }
-
 }
 
 

@@ -9,15 +9,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.google.firebase.auth.FirebaseAuth
-import ram.groupfinder.database.getUser
 import ram.groupfinder.model.Post
-import ram.groupfinder.util.userFromDocument
 import ram.groupfinder.view.theme.*
 
 @Composable
 fun PostListItem(post: Post) {
-
     Card(
         modifier = Modifier
             .fillMaxSize()
@@ -41,12 +37,15 @@ fun PostListItem(post: Post) {
             post.location?.let { Text(text = "Location: $it") }
             post.description?.let { Text(text = "Description:\n$it") }
 
-            //if (FirebaseAuth.getInstance().currentUser != null) {
-                Spacer(modifier = Modifier.height(15.dp))
-                Text(text = "Contact information:", fontWeight = FontWeight.Bold)
-                var contactPhone = Text(text = "Phonenumber: " + "")
-                var contactEmail = Text(text = "Email: " + "")
-            //}
+
+            Spacer(modifier = Modifier.height(15.dp))
+            Text(text = "Contact information:", fontWeight = FontWeight.Bold)
+
+            var contactPhone = Text(text = "Phonenumber: " + "")
+            var contactEmail = Text(text = "Email: " + "")
+
+
+
         }
     }
 }

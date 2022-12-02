@@ -3,8 +3,7 @@ package ram.groupfinder.viewmodel
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
-import ram.groupfinder.database.getPostsByUser
-import ram.groupfinder.database.searchResult
+import ram.groupfinder.database.searchPosts
 import ram.groupfinder.model.Post
 import ram.groupfinder.util.postsFromDocuments
 import ram.groupfinder.util.stringToKeywords
@@ -25,7 +24,7 @@ class SearchPageViewModel: ViewModel() {
     }
 
     fun getPosts(isGroupSearch: Boolean){
-        searchResult(stringToKeywords(keywords.value), isGroupSearch).addOnCompleteListener { task ->
+        searchPosts(stringToKeywords(keywords.value), isGroupSearch).addOnCompleteListener { task ->
             val result = task.result
             if(task.isSuccessful){
                 onPostsChange(postsFromDocuments(result.documents))

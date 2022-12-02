@@ -72,7 +72,7 @@ class CreatePostViewModel: ViewModel() {
             userId = FirebaseAuth.getInstance().currentUser?.uid,
             date = Timestamp(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant())),
             keywords = stringListToLowercase(keywords),
-            isGroupPost = isGroup.value,
+            isGroupPost = !isGroup.value,
             picture = "",
             location = location.value
         )
