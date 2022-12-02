@@ -42,12 +42,13 @@ import ram.groupfinder.viewmodel.MainViewModel
 class MainActivity : ComponentActivity() {
     private val viewModel: MainViewModel by viewModels()
 
+    //Taken from google's documentation
     private val signInLauncher = registerForActivityResult(
         FirebaseAuthUIActivityResultContract()
     ) { res ->
         this.onSignInResult(res)
     }
-
+    //Taken from google's documentation
     private fun onSignInResult(result: FirebaseAuthUIAuthenticationResult) {
         if (result.resultCode == RESULT_OK) {
             // Successfully signed in
@@ -81,7 +82,7 @@ class MainActivity : ComponentActivity() {
             Toast.makeText(this, "Sign in failed", Toast.LENGTH_LONG).show()
         }
     }
-
+    //Taken from google's documentation
     private fun createSignInIntent() {
         // Choose authentication providers
         val providers = arrayListOf(
@@ -95,7 +96,7 @@ class MainActivity : ComponentActivity() {
             .build()
         signInLauncher.launch(signInIntent)
     }
-
+    //Taken from google's documentation
     private fun signOut() {
         AuthUI.getInstance()
             .signOut(this)
@@ -104,7 +105,7 @@ class MainActivity : ComponentActivity() {
                 Toast.makeText(this, "You are signed out", Toast.LENGTH_LONG).show()
             }
     }
-
+    //Taken from google's documentation
     private fun delete() {
         val fbUser = FirebaseAuth.getInstance().currentUser
         if(fbUser != null ){
