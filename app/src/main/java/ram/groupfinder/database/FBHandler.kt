@@ -22,6 +22,10 @@ fun editUser(user: User){
     }
 }
 
+fun searchResult(userQuery: List<String>, isGroupSearch: Boolean): Task<QuerySnapshot> {
+    return Firebase.firestore.collection("posts").whereArrayContainsAny("keywords", userQuery).whereEqualTo("groupPost", isGroupSearch).get()
+}
+
 fun createUser(user: User){
 
     Firebase.firestore.collection("users").document(user.userId).set(userToFBUser(user)).addOnCompleteListener { task ->
