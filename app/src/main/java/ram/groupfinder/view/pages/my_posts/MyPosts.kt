@@ -18,7 +18,7 @@ fun MyPosts(){
     val viewModel: MyPostsViewModel = viewModel()
 
 
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.TopCenter){
+    Box(modifier = Modifier.fillMaxSize().padding(bottom = 60.dp), contentAlignment = Alignment.TopCenter){
         Column(modifier = Modifier.fillMaxWidth().padding(10.dp)) {
             PageTitle(title = "My Posts")
 
